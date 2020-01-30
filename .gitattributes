@@ -1,0 +1,2 @@
+postgis/setup_scripts/clean_db_dump.sql filter=lfs diff=lfs merge=lfs -text
+*.sql filter=lfs diff=lfs merge=lfs -text

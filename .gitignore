@@ -1,0 +1,6 @@
+.env
+map_api_key
+*venv/*
+*.idea*
+*__pycache__*
+*.pickle

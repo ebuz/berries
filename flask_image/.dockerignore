@@ -1,0 +1,4 @@
+map_api_key
+*venv/*
+*.idea*
+*__pycache__*

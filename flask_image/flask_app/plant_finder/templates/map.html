@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+            {{mymap.js}}
+            <title>plant finder</title>
+    </head>
+    <body>
+        <div id='main'>
+            <div id='plantselector'>
+                <p>Pull up the ten best spots in Mass to search for ...</p>
+                <form action='/' method="POST">
+                    <select multiple id="plants" name="plants">
+                        {% for plant in plant_options %}
+                            {% if plant in selected_plants %}
+                                <option selected value="{{plant}}">{{plant}}</option>
+                            {% else %}
+                                <option value="{{plant}}">{{plant}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+            <div id='map'>
+                {{mymap.html}}
+            </div>
+        </div>
+        <div id='footer'>
+        {% if plant_data %}
+                <p>{{ plant_data }}</p>
+        {% endif %}
+        </div>
+    </body>
+</html>

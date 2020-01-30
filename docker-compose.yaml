@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  flask_app:
+    build:
+      context: ./flask_image
+    ports:
+      - "5050:5000"
+    depends_on:
+      - postgis
+    environment:
+      POSTGRES_USER: '${PG_USER}'
+      POSTGRES_PASSWORD: '${PG_PASSWORD}'
+      POSTGRES_HOST: 'postgis'
+      GOOGLE_MAPS_API_KEY: '${GOOGLE_MAPS_API_KEY}'
+    command: ["wait-for-it", "postgis:5432", "--", "python3", "app.py"]
+    restart: on-failure
+    volumes:
+      - type: bind
+        source: ./flask_image/flask_app
+        target: /app
+  postgis:
+    build:
+      context: ./postgis
+    restart: on-failure
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: '${PG_USER}'
+      POSTGRES_PASSWORD: '${PG_PASSWORD}'
