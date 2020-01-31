@@ -20,22 +20,27 @@ Initial load times are slow as the models are built from scratch, however, they 
 ## data
 
 ### Sources
+
 Plant data are from:
-    - https://fallingfruit.org/data
-    - https://www.gbif.org/occurrence/search?country=US&has_coordinate=true&has_geospatial_issue=false&taxon_key=6
+
+- https://fallingfruit.org/data
+- https://www.gbif.org/occurrence/search?country=US&has_coordinate=true&has_geospatial_issue=false&taxon_key=6
 
 biome data from:
-    - https://www.usgs.gov/core-science-systems/science-analytics-and-synthesis/gap/science/land-cover-data-download?qt-science_center_objects=0#qt-science_center_objects
+
+- https://www.usgs.gov/core-science-systems/science-analytics-and-synthesis/gap/science/land-cover-data-download?qt-science_center_objects=0#qt-science_center_objects
 
 Climate and land data are from:
-    - ftp://prism.nacse.org/normals_800m/tmax/PRISM_tmax_30yr_normal_800mM2_annual_bil.zip
-    - ftp://prism.nacse.org/normals_800m/tmin/PRISM_tmin_30yr_normal_800mM2_annual_bil.zip
-    - ftp://prism.nacse.org/normals_800m/ppt/PRISM_ppt_30yr_normal_800mM2_annual_bil.zip
-    - http://prism.nacse.org/projects/public/phm/phm_us_grid.zip
-    - https://s3-us-west-2.amazonaws.com/mrlc/NLCD_2016_Land_Cover_L48_20190424.zip
+
+- ftp://prism.nacse.org/normals_800m/tmax/PRISM_tmax_30yr_normal_800mM2_annual_bil.zip
+- ftp://prism.nacse.org/normals_800m/tmin/PRISM_tmin_30yr_normal_800mM2_annual_bil.zip
+- ftp://prism.nacse.org/normals_800m/ppt/PRISM_ppt_30yr_normal_800mM2_annual_bil.zip
+- http://prism.nacse.org/projects/public/phm/phm_us_grid.zip
+- https://s3-us-west-2.amazonaws.com/mrlc/NLCD_2016_Land_Cover_L48_20190424.zip
 
 Massachusetts park data is from:
-    - http://download.massgis.digital.mass.gov/shapefiles/state/openspace.zip
+
+- http://download.massgis.digital.mass.gov/shapefiles/state/openspace.zip
 
 The postgresql server starts up with already cleaned data.
 Earlier attempts to make this had the database build from the raw data but this leads to incredibly long build times as some of the raw data takes quite a while to load into postgresql followed by a long series of sql queries to gather it into the final tables.

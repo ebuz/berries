@@ -16,6 +16,8 @@ def map():
             top_ten = results[:10]
             markers.extend(list(zip(top_ten.latitude, top_ten.longitude)))
     mymap = Map(
+        zoom=10,
+        style='height:100%;width:100%;margin:0;',
         identifier="view-side",
         lat=42.387265,
         lng=-72.038140,

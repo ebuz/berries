@@ -13,7 +13,6 @@ services:
       POSTGRES_HOST: 'postgis'
       GOOGLE_MAPS_API_KEY: '${GOOGLE_MAPS_API_KEY}'
     command: ["wait-for-it", "postgis:5432", "--", "python3", "app.py"]
-    restart: on-failure
     volumes:
       - type: bind
         source: ./flask_image/flask_app
