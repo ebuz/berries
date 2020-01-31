@@ -1,0 +1,24 @@
+#main{
+    height: 60vh;
+    width: 100wh;
+    display: flex;
+}
+#plantselector{
+    flex-grow: 1;
+}
+#map{
+    flex-grow: 3;
+    height: 100%;
+    width: 100%;
+}
+#footer{
+    height: 35vh;
+    width: 100wh;
+}
+select{
+    height: 40vh;
+}
+#wikiframe{
+    width: 100%;
+    height: 100%;
+}

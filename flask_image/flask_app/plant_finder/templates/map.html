@@ -27,8 +27,8 @@
             </div>
         </div>
         <div id='footer'>
-        {% if plant_data %}
-                <p>{{ plant_data }}</p>
+        {% if selected_plants|length %}
+            <iframe id="wikiframe" src="https://en.wikipedia.org/wiki/{{selected_plants[0].replace(' ', '_')}}"></iframe>
         {% endif %}
         </div>
     </body>
