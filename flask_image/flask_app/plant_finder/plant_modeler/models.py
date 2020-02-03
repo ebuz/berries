@@ -2,6 +2,9 @@ from plant_finder.plant_modeler.data import plant_options, plant_data, landcover
 import numpy as np
 from sklearn import svm
 from sklearn.model_selection import GridSearchCV
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import make_column_transformer
+from sklearn.pipeline import Pipeline
 import pickle
 import os.path
 
@@ -14,7 +17,7 @@ else:
     fitting_dict = {}
     for plant, symbol in plant_options.items():
         print(f'{symbol}:{plant}')
-        species_data = plant_data.loc[plant_data.accepted_symbol == symbol]
+        species_data = plant_data[plant_data.accepted_symbol == symbol]
         X = species_data[features]
         n_features = len(features)
         search_params = {'kernel': ('linear', 'sigmoid', 'rbf'),

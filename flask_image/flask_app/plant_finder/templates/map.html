@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html>
     <head>
-            <title>Berries</title>
+            <title>hucklebery hunter</title>
             {{mymap.js}}
             <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     </head>
@@ -11,16 +11,23 @@
                 <p>Pull up the ten best spots in Mass to search for ...</p>
                 <form action='/' method="POST">
                     <select multiple id="plants" name="plants">
-                        {% for plant in plant_options %}
+                        {% for plant, symbol in plant_options.items() %}
                             {% if plant in selected_plants %}
-                                <option selected value="{{plant}}">{{plant}}</option>
+                                <option selected value="{{symbol}}">{{plant}} {{harvest_strings_dict[symbol]}}</option>
                             {% else %}
-                                <option value="{{plant}}">{{plant}}</option>
+                                <option value="{{symbol}}">{{plant}} {{harvest_strings_dict[symbol]}}</option>
                             {% endif %}
                         {% endfor %}
-                    </select>
+                    </select><br/>
                     <input type="submit" value="Search">
                 </form>
+                <h4>harvest season legend</h4>
+                <ul>
+                    <li>🌱: Spring</li>
+                    <li>🌞: Summer</li>
+                    <li>🍂: Fall</li>
+                    <li>❄️: Winter</li>
+                </ul>
             </div>
             <div id='map'>
                 {{mymap.html}}
@@ -28,7 +35,7 @@
         </div>
         <div id='footer'>
         {% if selected_plants|length %}
-            <iframe id="wikiframe" src="https://en.wikipedia.org/wiki/{{selected_plants[0].replace(' ', '_')}}"></iframe>
+            <iframe id="wikiframe" src="https://en.wikipedia.org/wiki/{{wiki_slugs[selected_plants[0]]}}"></iframe>
         {% endif %}
         </div>
     </body>

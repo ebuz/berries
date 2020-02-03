@@ -2,17 +2,25 @@ from plant_finder import app, plant_modeler
 from flask_googlemaps import Map
 from flask import render_template, request
 
+season_key = {'Spring':'🌱', 'Summer':'🌞', 'Fall':'🍂', 'Winter':'❄️'}
+def harvest_strings(l):
+    if l[0] == l[1]:
+        return season_key[l[0]]
+    return ' ~ '.join(season_key[i] for i in l)
+
+harvest_strings_dict = {sym: harvest_strings(sea[1:]) for sym, sea in plant_modeler.plant_characteristics.set_index('accepted_symbol').T.to_dict('list').items()}
+wiki_slugs = {sym: plant.replace(' ', '_') for plant, sym in plant_modeler.plant_options.items()}
+
 @app.route('/', methods = ['POST', 'GET'])
 @app.route('/index', methods = ['POST', 'GET'])
 def map():
-    plant_options = plant_modeler.plant_options.keys()
     selected_plants = []
     markers = []
-    if request.method == 'POST':
+    if request.method == 'POST' and len(request.form.getlist('plants')) > 0:
         selected_plants = request.form.getlist('plants')
-        results = plant_modeler.predict_plant_locations([plant_modeler.plant_options[p] for p in selected_plants])
+        results = plant_modeler.predict_plant_locations(selected_plants)
         for plant in selected_plants:
-            results.sort_values(by=f'{plant_modeler.plant_options[plant]}_svm_score', ascending = False)
+            results.sort_values(by=f'{plant}_svm_score', ascending = False)
             top_ten = results[:10]
             markers.extend(list(zip(top_ten.latitude, top_ten.longitude)))
     mymap = Map(
@@ -25,5 +33,7 @@ def map():
         markers=markers
     )
     return render_template('map.html',
-            plant_options=plant_options, selected_plants=selected_plants,
-            mymap=mymap, plant_data=None)
+                           plant_options=plant_modeler.plant_options,
+                           harvest_strings_dict=harvest_strings_dict,
+                           selected_plants=selected_plants, mymap=mymap,
+                           wiki_slugs=wiki_slugs)
