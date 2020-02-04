@@ -1,20 +1,29 @@
-# plant finder
+# Huckleberry hunter
 
-This is a minimal working version of the plant finder app.
-It is a docker-compose setup running a postgresql server with postgis extensions and a flask front and back end.
+This is a deployable version of the Huckleberry hunter app.
+It is a docker-compose setup running a PostgreSQL server with [PostGIS](https://postgis.net/) extensions and a flask front/back end.
 
 ## requirements
 
-- docker-compose
-- a google maps api key
+- docker-compose (tested on 1.25.3; may work with as early as 1.22.0)
+- a google maps api key [get one here](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 ## starting up
 
 Put the api key into a `.env` file as `GOOGLE_MAPS_API_KEY=<KEY>` so docker-compose properly passes it onto the flask app.
 In addition define a `PG_USER=<user>` and `PG_PASSWORD=<user>` so flask knows how to access the database.
-While these could be hard-coded in later versions, the current docker-compose config exposes the postgresql server for testing making it a security risk to deploy this to the web without a firewall.
 
-Initial load times are slow as the models are built from scratch, however, they are pickled for faster load times later.
+### example `.env`
+
+```bash
+GOOGLE_MAPS_API_KEY=yourkey
+PG_USER=huckleberry
+PG_PASSWORD=hunter
+```
+
+These can be hard-coded within the `docker-compose.yaml`; however, the current docker-compose configuration exposes the postgresql server making it a security risk to deploy this to the web without a firewall.
+
+Initial start-up takes a while as the predictive models are built from scratch. During this time the web server will not respond to requests. The models are pickled for faster load times on subsequent server restarts so long as the containers are set to persist after shutdown.
 
 
 ## data
@@ -25,10 +34,6 @@ Plant data are from:
 
 - https://fallingfruit.org/data
 - https://www.gbif.org/occurrence/search?country=US&has_coordinate=true&has_geospatial_issue=false&taxon_key=6
-
-biome data from:
-
-- https://www.usgs.gov/core-science-systems/science-analytics-and-synthesis/gap/science/land-cover-data-download?qt-science_center_objects=0#qt-science_center_objects
 
 Climate and land data are from:
 
@@ -42,7 +47,7 @@ Massachusetts park data is from:
 
 - http://download.massgis.digital.mass.gov/shapefiles/state/openspace.zip
 
-The postgresql server starts up with already cleaned data.
-Earlier attempts to make this had the database build from the raw data but this leads to incredibly long build times as some of the raw data takes quite a while to load into postgresql followed by a long series of sql queries to gather it into the final tables.
+The postgresql server starts up with substantially cleaned data that combines the above sources into a few tables.
+Earlier attempts to make this deployable version had the database build from the raw data but this leads to incredibly long build times given the multiple stages needed to join the tabular, raster, and GIS data.
 Automating it is also difficult as the gbif plant data and the biome data cannot be programmatically downloaded (gbif requires authenticating and the biome data has a captcha).
-Documenting/layout the full data pipeline is a TODO but low priority.
+Providing a reproducible data pipeline is a TODO but low priority at this time.
