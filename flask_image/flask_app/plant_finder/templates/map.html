@@ -28,6 +28,9 @@
                     <li>🍂: Fall</li>
                     <li>❄️: Winter</li>
                 </ul>
+                {% if no_results %}
+                <p><span style="color:red">No results!</span></p>
+                {% endif %}
             </div>
             <div id='map'>
                 {{mymap.html}}

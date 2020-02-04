@@ -27,6 +27,9 @@ plant_characteristics = pd.read_sql_query("select distinct accepted_symbol, bloo
                                           "fruit_period_end from plant_characteristics;",
                                           con=engine)
 
+mass_observed_edibles = pd.read_sql_query("select accepted_symbol from mass_observed_edibles;",
+                                          con=engine)
+
 #subset data to fruiting plants
 plant_data = plant_data[plant_data.accepted_symbol.isin(fruiting_plants.accepted_symbol)]
 

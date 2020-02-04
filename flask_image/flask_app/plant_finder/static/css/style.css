@@ -16,8 +16,8 @@
     width: 100wh;
 }
 select{
-    height: 35vh;
-    line-height: 1em;
+    height: 30vh;
+    font-size: medium;
 }
 #wikiframe{
     width: 100%;
