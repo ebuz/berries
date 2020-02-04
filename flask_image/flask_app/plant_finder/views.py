@@ -27,7 +27,7 @@ def main_map():
         for plant in selected_plants:
             print(f'finding park predictions for {plant}')
             park_predictions = plant_modeler.models.park_predictions[plant_modeler.models.park_predictions.plant == plant]
-            park_predictions = park_predictions[park_predictions.nu == 0.25]
+            park_predictions = park_predictions[park_predictions.nu == 0.2]
             park_predictions = park_predictions.sort_values(by='distance', ascending=False)
             top_ten = park_predictions[:10]
             print(f'{top_ten}')

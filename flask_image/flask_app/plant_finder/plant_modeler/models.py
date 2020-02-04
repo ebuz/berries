@@ -71,7 +71,7 @@ if os.path.isfile('model_cache.pickle'):
     with open('model_cache.pickle', 'rb') as infile:
         fitted_models_by_nu = pickle.load(infile)
 else:
-    nu_search_space = [.15, .2, .25, .3, .35]
+    nu_search_space = np.linspace(0.2, 0.25, num=5)
     for nu in nu_search_space:
         fits, _, _ = gridsearch_fit(nu)
         # save fits by nu
