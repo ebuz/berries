@@ -90,7 +90,7 @@ else:
                 distance=park_metrics(fits, s, 'decision'),
                 plant=s, nu=nu)
             park_predictions = pd.concat([park_predictions, park_results], ignore_index=True, sort=False)
-    park_results = park_results[park_results.prediction == True]
+    park_predictions = park_predictions[park_predictions.prediction == True].reset_index()
     with open('park_cache.pickle', 'wb') as outfile:
         pickle.dump(park_predictions, outfile, pickle.HIGHEST_PROTOCOL)
 
