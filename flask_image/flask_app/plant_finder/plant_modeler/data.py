@@ -30,6 +30,15 @@ plant_characteristics = pd.read_sql_query("select distinct accepted_symbol, bloo
 mass_observed_edibles = pd.read_sql_query("select accepted_symbol from mass_observed_edibles;",
                                           con=engine)
 
+shp_path = 'plant_finder/plant_modeler/cb_2018_us_state_500k/cb_2018_us_state_500k.shp'
+stateshapes = gpd.read_file(shp_path)
+stateshapes['geometry'] = stateshapes['geometry'].to_crs(crs=plant_data.crs)
+mass_shape = stateshapes[stateshapes.NAME == 'Massachusetts']
+mass_mask = plant_data.within(mass_shape.iloc[0].geometry)
+mass_plant_data = plant_data[mass_mask]
+mass_plants = mass_plant_data[['accepted_symbol']].drop_duplicates()
+mass_observed_edibles = pd.concat([mass_observed_edibles, mass_plants], ignore_index=True).drop_duplicates()
+
 #subset data to fruiting plants
 plant_data = plant_data[plant_data.accepted_symbol.isin(fruiting_plants.accepted_symbol)]
 

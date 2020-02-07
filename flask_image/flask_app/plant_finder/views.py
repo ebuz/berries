@@ -26,12 +26,13 @@ def main_map():
         print(f'got plant requests {selected_plants}')
         for plant in selected_plants:
             print(f'finding park predictions for {plant}')
-            park_predictions = plant_modeler.models.park_predictions[plant_modeler.models.park_predictions.plant == plant]
-            park_predictions = park_predictions[park_predictions.nu == 0.2]
+            park_predictions = plant_modeler.models.model_park_predictions['isolationforest']
+            park_predictions = park_predictions[park_predictions.plant == plant]
+            park_predictions = park_predictions[park_predictions.nu == 0.1]
             park_predictions = park_predictions.sort_values(by='distance', ascending=False)
             top_ten = park_predictions[:10]
             print(f'{top_ten}')
-            markers.extend(list(zip(top_ten.latitude, top_ten.longitude)))
+            markers.extend( [{'lat':p['latitude'], 'lng':p['longitude'], 'infobox':p['site_name']} for p in top_ten.to_dict('records')] )
         if len(markers) < 1:
             no_results = True
     mymap = Map(
