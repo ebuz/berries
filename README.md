@@ -51,3 +51,7 @@ The postgresql server starts up with substantially cleaned data that combines th
 Earlier attempts to make this deployable version had the database build from the raw data but this leads to incredibly long build times given the multiple stages needed to join the tabular, raster, and GIS data.
 Automating it is also difficult as the gbif plant data and the biome data cannot be programmatically downloaded (gbif requires authenticating and the biome data has a captcha).
 Providing a reproducible data pipeline is a TODO but low priority at this time.
+
+## TODO
+
+App load times are quite long, especially if the app is building the models to begin with. It may be better to spin off the model building into a separate stage before the web-server is loaded up. One can also reduce the number of sql calls that involve pulling in GIS data as that is a substantial slowdown in addition to the model building.

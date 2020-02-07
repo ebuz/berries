@@ -8,6 +8,8 @@ COPY ./flask_app/requirements.txt ./
 RUN pip3 install --no-cache-dir -r requirements.txt
 #COPY ./flask_app /app
 
-ARG FLASK_APP=plant_finder
-ARG FLASK_ENV=development
+ENV FLASK_APP=plant_finder/__init__.py
+ENV FLASK_ENV=development
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 EXPOSE 5000
