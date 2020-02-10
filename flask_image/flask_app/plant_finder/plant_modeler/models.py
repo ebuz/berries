@@ -137,7 +137,7 @@ for model in model_types:
                     distance=park_metrics(fits, s, 'decision'),
                     plant=s, nu=nu, model=model)
                 park_predictions = pd.concat([park_predictions, p_r], ignore_index=True, sort=False)
-        # park_predictions = park_predictions[park_predictions.prediction == True]
+        park_predictions = park_predictions[park_predictions.prediction == True].reset_index()
         model_park_predictions[model] = park_predictions
         with open(f'{model}_park_cache.pickle', 'wb') as outfile:
             pickle.dump(park_predictions, outfile, pickle.HIGHEST_PROTOCOL)

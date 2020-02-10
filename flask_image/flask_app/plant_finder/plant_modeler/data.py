@@ -58,7 +58,8 @@ plant_characteristics = plant_characteristics[plant_characteristics.accepted_sym
 
 # load parks data
 mass_openspace_stats = gpd.GeoDataFrame.from_postgis("select *, ST_X(ST_Centroid(geom)) as longitude, "
-                                                     "ST_Y(ST_Centroid(geom)) as latitude from mass_openspace_stats;",
+                                                     "ST_Y(ST_Centroid(geom)) as latitude from mass_openspace_stats "
+                                                     "WHERE site_name IS NOT NULL AND pub_access = 'Y';",
                                                      con=engine, geom_col='geom')
 
 # re-encode parkland to one-hot encoding
