@@ -9,8 +9,14 @@
   background-color: lightgray;
   border-left:
 }
+.nav-item a{
+  color: white;
+}
 .selected{
   background-color: white;
+}
+.selected>a{
+  color: black;
 }
 #main{
     height: 60vh;
