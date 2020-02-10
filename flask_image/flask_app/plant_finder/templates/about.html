@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>About Hucklebery hunter</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <div id='nav'>
+            <div class="nav-item" id="nav-main" onclick="location.href='index';"><a href="index">Huckleberry Hunter</a></div>
+            <div class="nav-item selected" id="nav-about"><a>About</a></div>
+        </div>
+        <div id="main">
+            <div id="about">
+                <p>
+                    Huckleberry hunter is a data driven plant locator focusing on edible fruit and nut bearing perennials.
+                    The app predicts plant distributions and uses these predictive models to identify which of
+                    <a href="http://docs.digital.mass.gov/dataset/massgis-data-protected-and-recreational-openspace">Massachusetts' public open spaces</a>
+                    are likely to be home to these plants.
+                    The data powering this app come from a few places. It uses plant identifications from
+                    <a href="http://fallingfruit.org/">fallingfruit.org</a> and
+                    <a href="http://inaturalist.org/">inaturalist.org</a>, in combination with climate data from the
+                    <a href="http://prism.nacse.org/">PRISM climate group</a> and the
+                    <a href="http://www.mrlc.gov/">2016 National Land Cover Database</a>.
+                    The underlying code to produce this app is here:
+                    <a href="https://github.com/ebuz/huckleberry_hunter">github.com/ebuz/huckleberry_hunter</a>.
+                </p>
+                <p>
+                    Please forage and use Huckleberry hunter responsibly.
+                    This app focuses on plants with edible fruits, nuts and seeds since collecting from these plants
+                    should not harm the plant. With that in mind, please do not harm any plants you find using this
+                    app, neither the ones you collect from or any of their neighbors.
+                    Be sure to follow any local signs and guidelines when foraging; treat our outdoors with care.
+                </p>
+            </div>
+            <div id="google-slides">
+                <p>
+                    This is a slideshow about Huckleberry hunter and an overview of the underlying method it uses.
+                </p>
+               <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSdLHuJgBLRagrcvjZ11vz7kV1GM2GlKbxPEuBUqRt2lFsS-ScYjRFgVl1mbkO4dzOSn-tsONyHLEuE/embed?start=false&loop=false&delayms=10000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+        </div>
+
+    </body>
+</html>

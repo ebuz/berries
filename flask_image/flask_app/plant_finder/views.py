@@ -47,3 +47,8 @@ def main_map():
                            harvest_strings_dict=harvest_strings_dict,
                            selected_plants=selected_plants,
                            no_results=no_results, mymap=mymap, wiki_slugs=wiki_slugs)
+
+
+@app.route('/about', methods = ['GET'])
+def about():
+    return render_template('about.html')
