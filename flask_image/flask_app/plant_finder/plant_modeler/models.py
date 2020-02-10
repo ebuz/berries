@@ -101,7 +101,7 @@ def park_metrics(fits, symbol, metric='predict'):
 
 
 nu_search_space = list(np.linspace(0.1, 0.25, num=5))
-model_types = ['svm', 'isolationforest', 'localoutlierfactor']
+model_types = ['isolationforest']
 fitted_models = {}
 
 for model in model_types:
@@ -142,6 +142,6 @@ for model in model_types:
         with open(f'{model}_park_cache.pickle', 'wb') as outfile:
             pickle.dump(park_predictions, outfile, pickle.HIGHEST_PROTOCOL)
 
-# avoid breaking code in other parts of the app
-fitted_models_by_nu = fitted_models['svm']
-park_predictions = model_park_predictions['svm']
+# select model to use for frontend
+park_predictions = model_park_predictions['isolationforest']
+park_predictions = park_predictions[park_predictions.nu == 0.1].reset_index()
